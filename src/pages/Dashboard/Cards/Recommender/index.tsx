@@ -28,8 +28,7 @@ import {
 import { Input } from "@/components/ui/Input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Upload, CreditCard, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { CreditCard, ArrowRight } from "lucide-react";
 import { CATEGORIES, CREDIT_CARDS, PLATFORMS } from "@/lib/constants/constants";
 import { recommendCard } from "@/api/cardApi";
 
