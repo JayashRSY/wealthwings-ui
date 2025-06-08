@@ -39,9 +39,9 @@ export default function IncomeList({ onEdit }: IncomeListProps) {
     pages: 1,
   });
 
-  const fetchIncomes = async () => {
+  const fetchIncomes = async (page: number = 1) => {
     try {
-      const response: IIncomesResponse = await getIncomes();
+      const response: IIncomesResponse = await getIncomes({ page });
       if (response.success && response.data) {
         setIncomes(response.data.incomes);
         setPagination(response.data.pagination);
@@ -144,6 +144,30 @@ export default function IncomeList({ onEdit }: IncomeListProps) {
           </TableBody>
         </Table>
       </div>
+
+      {pagination.pages > 1 && (
+        <div className="flex items-center justify-end space-x-2 py-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => fetchIncomes(pagination.page - 1)}
+            disabled={pagination.page === 1}
+          >
+            Previous
+          </Button>
+          <span className="text-sm text-muted-foreground">
+            Page {pagination.page} of {pagination.pages}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => fetchIncomes(pagination.page + 1)}
+            disabled={pagination.page === pagination.pages}
+          >
+            Next
+          </Button>
+        </div>
+      )}
 
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>

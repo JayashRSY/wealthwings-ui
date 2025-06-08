@@ -23,8 +23,8 @@ export const deleteExpense = async (id: string) => {
 };
 
 // Income APIs
-export const getIncomes = async () => {
-  const response = await axiosInstance.get<IIncomesResponse>('/incomes');
+export const getIncomes = async (params?: { page?: number }) => {
+  const response = await axiosInstance.get<IIncomesResponse>('/incomes', { params });
   return response.data;
 };
 
