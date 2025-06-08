@@ -6,7 +6,7 @@ import {
   LayoutDashboard,
   LineChart,
   CreditCard,
-  PiggyBank,
+  // PiggyBank,
   Calculator,
   Briefcase,
   HelpCircle,
@@ -54,6 +54,12 @@ const Sidebar: React.FC = () => {
       color: "text-purple-500",
     },
     {
+      label: "Finance Tracker",
+      href: "/finance-tracker",
+      icon: <Wallet className="w-5 h-5" />,
+      color: "text-orange-500",
+    },
+    {
       label: "Cards",
       href: "/cards",
       icon: <CreditCard className="w-5 h-5" />,
@@ -64,18 +70,12 @@ const Sidebar: React.FC = () => {
         { label: "Statement History", href: "statement-history" },
       ],
     },
-    {
-      label: "Finance Tracker",
-      href: "/finance-tracker",
-      icon: <Wallet className="w-5 h-5" />,
-      color: "text-orange-500",
-    },
-    {
-      label: "Financial Planning",
-      href: "/financial-planning",
-      icon: <PiggyBank className="w-5 h-5" />,
-      color: "text-orange-500",
-    },
+    // {
+    //   label: "Financial Planning",
+    //   href: "/financial-planning",
+    //   icon: <PiggyBank className="w-5 h-5" />,
+    //   color: "text-orange-500",
+    // },
     {
       label: "Finance Calculators",
       href: "/calculators",

@@ -1,189 +1,278 @@
-import { Bike, Calendar, MapPin, Star, ChevronRight, Instagram, Facebook, Twitter } from "lucide-react";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { ArrowRight, BarChart3, Calculator, CreditCard, FileText, LineChart, MessageSquare, PiggyBank, TrendingUp } from "lucide-react"
+
+const features = [
+  {
+    title: "Income & Expense Tracker",
+    description: "Track your money flow with precision and ease",
+    icon: LineChart,
+  },
+  {
+    title: "Smart Credit Card Recommender",
+    description: "Find the perfect credit card for your spending habits",
+    icon: CreditCard,
+  },
+  {
+    title: "Real-Time Spend Analytics",
+    description: "Get instant insights into your spending patterns",
+    icon: BarChart3,
+  },
+  {
+    title: "AI-Based Financial Insights",
+    description: "Leverage AI to make smarter financial decisions",
+    icon: TrendingUp,
+  },
+  {
+    title: "PDF & SMS Statement Parser",
+    description: "Automatically import your financial statements",
+    icon: FileText,
+  },
+  {
+    title: "Finance Calculators",
+    description: "Plan your financial future with our calculators",
+    icon: Calculator,
+  },
+  {
+    title: "Budget Alerts & Subscriptions",
+    description: "Stay on top of your recurring payments",
+    icon: MessageSquare,
+  },
+]
+
+const testimonials = [
+  {
+    name: "Sarah Johnson",
+    role: "Small Business Owner",
+    quote: "FinGuard has transformed how I manage my business finances. The insights are invaluable!",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+  },
+  {
+    name: "Michael Chen",
+    role: "Software Engineer",
+    quote: "The credit card recommendations helped me maximize my rewards. Game changer!",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael",
+  },
+  {
+    name: "Emma Rodriguez",
+    role: "Freelance Designer",
+    quote: "Finally, a finance app that's both powerful and easy to use. Love it!",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma",
+  },
+]
 
 const Home = () => {
-  const handleBookNow = () => {
-    toast("Booking initiated!");
-  };
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 z-0"></div>
-        <div className="container mx-auto px-4 py-20 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="flex-1 space-y-6">
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-                <span className="text-primary">Explore</span> the city on two wheels
-              </h1>
-              <p className="text-muted-foreground text-lg max-w-md">
-                Rent premium bikes for your adventure. Affordable rates, flexible plans, and top-quality service.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" onClick={handleBookNow}>
-                  Book Now <ChevronRight className="ml-1" />
-                </Button>
-                <Button size="lg" variant="outline">
-                  View Fleet
-                </Button>
-              </div>
-            </div>
-            <div className="flex-1">
-              <img 
-                src="https://images.unsplash.com/photo-1485965120184-e220f721d03e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
-                alt="Premium bike" 
-                className="rounded-lg shadow-xl w-full max-w-lg mx-auto object-cover h-[400px]" 
-              />
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-secondary/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-foreground">
+              Master Your Money.
+              <br />
+              Maximize Your Rewards.
+            </h1>
+            <p className="mt-6 text-xl text-muted-foreground max-w-3xl mx-auto">
+              Track your expenses, analyze your spending, and get the best credit card suggestions — all in one place.
+            </p>
+            <div className="mt-10 flex gap-4 justify-center">
+              <Button size="lg" className="rounded-full">
+                Get Started
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button size="lg" variant="outline" className="rounded-full">
+                See How It Works
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-muted/30">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Choose Our Bikes</h2>
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Everything you need to manage your finances
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature) => (
+              <Card key={feature.title} className="border-none shadow-lg">
+                <CardHeader>
+                  <feature.icon className="h-8 w-8 text-primary mb-4" />
+                  <CardTitle>{feature.title}</CardTitle>
+                  <CardDescription>{feature.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Analytics Preview Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Powerful Analytics at Your Fingertips
+            </h2>
+          </div>
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            <div className="aspect-video bg-card rounded-2xl flex items-center justify-center">
+              <PiggyBank className="h-32 w-32 text-primary/20" />
+              {/* Replace with actual analytics screenshot */}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              How It Works
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="bg-card border-none shadow-md">
-              <CardContent className="pt-6">
-                <div className="rounded-full bg-primary/10 p-3 w-fit mb-4">
-                  <Bike className="text-primary h-6 w-6" />
+            <Card className="text-center">
+              <CardHeader>
+                <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-primary">1</span>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Premium Fleet</h3>
-                <p className="text-muted-foreground">Our bikes are regularly maintained and include the latest models for optimal performance.</p>
-              </CardContent>
+                <CardTitle>Connect Accounts</CardTitle>
+                <CardDescription>Securely link your bank accounts and credit cards</CardDescription>
+              </CardHeader>
             </Card>
-            <Card className="bg-card border-none shadow-md">
-              <CardContent className="pt-6">
-                <div className="rounded-full bg-primary/10 p-3 w-fit mb-4">
-                  <MapPin className="text-primary h-6 w-6" />
+            <Card className="text-center">
+              <CardHeader>
+                <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-primary">2</span>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Convenient Locations</h3>
-                <p className="text-muted-foreground">Multiple pickup points across the city for your convenience.</p>
-              </CardContent>
+                <CardTitle>Track Spend</CardTitle>
+                <CardDescription>Monitor your expenses in real-time</CardDescription>
+              </CardHeader>
             </Card>
-            <Card className="bg-card border-none shadow-md">
-              <CardContent className="pt-6">
-                <div className="rounded-full bg-primary/10 p-3 w-fit mb-4">
-                  <Calendar className="text-primary h-6 w-6" />
+            <Card className="text-center">
+              <CardHeader>
+                <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-primary">3</span>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">Flexible Rentals</h3>
-                <p className="text-muted-foreground">Hourly, daily, or weekly rentals to suit your schedule and needs.</p>
-              </CardContent>
+                <CardTitle>Save Smarter</CardTitle>
+                <CardDescription>Get personalized insights to optimize your finances</CardDescription>
+              </CardHeader>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Popular Bikes Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Our Popular Bikes</h2>
+      {/* Testimonials Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-secondary/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              What Our Users Say
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {["City Cruiser", "Mountain Explorer", "Road Master"].map((bike, index) => (
-              <Card key={index} className="overflow-hidden group">
-                <div className="relative h-48 bg-muted">
-                  <img 
-                    src={`https://source.unsplash.com/random/300x200?bike,bicycle&sig=${index}`} 
-                    alt={bike} 
-                    className="w-full h-full object-cover transition-transform group-hover:scale-105" 
+            {testimonials.map((testimonial) => (
+              <Card key={testimonial.name} className="border-none shadow-lg">
+                <CardHeader>
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-16 h-16 rounded-full mx-auto mb-4"
                   />
-                  <div className="absolute top-2 right-2 bg-primary text-white text-xs px-2 py-1 rounded-full">
-                    Popular
-                  </div>
-                </div>
-                <CardContent className="p-5">
-                  <div className="flex justify-between items-center mb-3">
-                    <h3 className="font-semibold text-lg">{bike}</h3>
-                    <div className="flex items-center">
-                      <Star className="h-4 w-4 fill-primary text-primary" />
-                      <span className="ml-1 text-sm">4.{8 - index}</span>
-                    </div>
-                  </div>
-                  <p className="text-muted-foreground text-sm mb-4">Perfect for {index === 0 ? "city rides" : index === 1 ? "off-road adventures" : "speed enthusiasts"}.</p>
-                  <div className="flex justify-between items-center">
-                    <span className="font-bold text-lg">${15 + index * 5}/hour</span>
-                    <Button variant="outline" size="sm" onClick={() => toast(`${bike} selected!`)}>
-                      Select
-                    </Button>
-                  </div>
+                  <CardTitle className="text-center">{testimonial.name}</CardTitle>
+                  <CardDescription className="text-center">{testimonial.role}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-center text-muted-foreground">"{testimonial.quote}"</p>
                 </CardContent>
               </Card>
             ))}
           </div>
-          <div className="text-center mt-10">
-            <Button variant="secondary" size="lg">
-              View All Bikes
-            </Button>
-          </div>
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-16 bg-primary/5">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready for Your Next Adventure?</h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
-            Join thousands of satisfied customers who have explored the city with our premium bikes.
-          </p>
-          <Button size="lg" onClick={handleBookNow} className="px-8">
-            Book Your Ride Now
+      {/* CTA Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-primary text-primary-foreground">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-8">
+            Take control of your finances today.
+          </h2>
+          <Button size="lg" variant="secondary" className="rounded-full">
+            Sign Up Free
+            <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-muted py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-background border-t">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-lg mb-4">Bike Rentals</h3>
-              <p className="text-muted-foreground">Premium bike rental services for all your adventures.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
+              <h3 className="font-semibold mb-4">About</h3>
               <ul className="space-y-2">
-                {["Home", "About Us", "Bikes", "Pricing", "Contact"].map((link, i) => (
-                  <li key={i}>
-                    <a href="#" className="text-muted-foreground hover:text-primary transition-colors">{link}</a>
-                  </li>
-                ))}
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Company</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Careers</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Blog</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
-              <address className="text-muted-foreground not-italic">
-                <p>123 Bike Street</p>
-                <p>Cycle City, BC 10000</p>
-                <p className="mt-2">info@bikerentals.com</p>
-                <p>+1 (555) 123-4567</p>
-              </address>
+              <h3 className="font-semibold mb-4">Features</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Expense Tracking</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Credit Cards</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Analytics</a></li>
+              </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Follow Us</h4>
-              <div className="flex space-x-4">
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  <Instagram />
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  <Facebook />
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  <Twitter />
-                </a>
-              </div>
+              <h3 className="font-semibold mb-4">Legal</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Privacy</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Terms</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Security</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Contact</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Support</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Sales</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-foreground">Partners</a></li>
+              </ul>
             </div>
           </div>
-          <div className="border-t border-border mt-8 pt-8 text-center text-muted-foreground">
-            <p>© {new Date().getFullYear()} Bike Rentals. All rights reserved.</p>
+          <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center">
+            <div className="flex items-center mb-4 md:mb-0">
+              <span className="text-xl font-bold">FinGuard</span>
+            </div>
+            <div className="flex space-x-6">
+              <a href="#" className="text-muted-foreground hover:text-foreground">
+                <span className="sr-only">Twitter</span>
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                </svg>
+              </a>
+              <a href="#" className="text-muted-foreground hover:text-foreground">
+                <span className="sr-only">LinkedIn</span>
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div className="mt-8 text-center text-sm text-muted-foreground">
+            © 2025 FinGuard. All rights reserved.
           </div>
         </div>
       </footer>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

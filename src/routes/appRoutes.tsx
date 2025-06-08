@@ -27,6 +27,8 @@ const Cards = lazy(() => import("../pages/Dashboard/Cards"));
 const CardRecommender = lazy(() => import("../pages/Dashboard/Cards/Recommender/index"));
 const StatementUpload = lazy(() => import("../pages/Dashboard/Cards/StatementUpload/index"));
 const StatementHistory = lazy(() => import("../pages/Dashboard/Cards/StatementHistory/index"));
+const Analytics = lazy(() => import("../pages/Analytics"));
+const Services = lazy(() => import("../pages/Services"));
 
 export const appRoutes = [
   { path: "/", element: Home },
@@ -73,6 +75,8 @@ export const appRoutes = [
           { path: "*", element: NotFound },
         ],
       },
+      { path: "analytics", element: Analytics },
+      { path: "services", element: Services },
       { path: "*", element: NotFound },
     ],
   },
