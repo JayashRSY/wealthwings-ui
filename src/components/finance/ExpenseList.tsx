@@ -39,9 +39,9 @@ export default function ExpenseList({ onEdit }: ExpenseListProps) {
     pages: 1,
   });
 
-  const fetchExpenses = async () => {
+  const fetchExpenses = async (page: number = 1) => {
     try {
-      const response: IExpensesResponse = await getExpenses();
+      const response: IExpensesResponse = await getExpenses({ page });
       if (response.success && response.data) {
         setExpenses(response.data.expenses);
         setPagination(response.data.pagination);
@@ -144,6 +144,30 @@ export default function ExpenseList({ onEdit }: ExpenseListProps) {
           </TableBody>
         </Table>
       </div>
+
+      {pagination.pages > 1 && (
+        <div className="flex items-center justify-end space-x-2 py-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => fetchExpenses(pagination.page - 1)}
+            disabled={pagination.page === 1}
+          >
+            Previous
+          </Button>
+          <span className="text-sm text-muted-foreground">
+            Page {pagination.page} of {pagination.pages}
+          </span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => fetchExpenses(pagination.page + 1)}
+            disabled={pagination.page === pagination.pages}
+          >
+            Next
+          </Button>
+        </div>
+      )}
 
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>

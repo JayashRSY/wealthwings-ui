@@ -2,8 +2,8 @@ import { IExpense, IExpensesResponse, IIncome, IIncomesResponse } from "@/interf
 import axiosInstance from "@/lib/api/axiosInstance";
 
 // Expense APIs
-export const getExpenses = async () => {
-  const response = await axiosInstance.get<IExpensesResponse>('/expenses');
+export const getExpenses = async (params?: { page?: number }) => {
+  const response = await axiosInstance.get<IExpensesResponse>('/expenses', { params });
   return response.data;
 };
 
