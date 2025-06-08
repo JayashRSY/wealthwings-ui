@@ -11,6 +11,8 @@ const Register = lazy(() => import("../pages/Register"));
 const Profile = lazy(() => import("../pages/Profile"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Dashboard = lazy(() => import("../pages/Dashboard"));
+const FinanceTrackerLayout = lazy(() => import("../pages/Dashboard/FinanceTracker/FinanceTrackerLayout"));
+const FinanceTracker = lazy(() => import("../pages/Dashboard/FinanceTracker"));
 const Calculators = lazy(() => import("../pages/Dashboard/Calculators"));
 const MfCommission = lazy(() => import("../pages/Dashboard/Calculators/MFCommission/index"));
 const TaxRegime = lazy(() => import("../pages/Dashboard/Calculators/TaxRegime/index"));
@@ -46,6 +48,14 @@ export const appRoutes = [
     element: DashboardLayout,
     children: [
       { index: true, element: Dashboard },
+      {
+        path: "finance-tracker",
+        element: FinanceTrackerLayout,
+        children: [
+          { index: true, element: FinanceTracker },
+          { path: "*", element: NotFound },
+        ],
+      },
       {
         path: "calculators",
         element: CalculatorsLayout,

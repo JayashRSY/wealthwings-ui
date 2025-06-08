@@ -5,6 +5,7 @@ import Loader from "./components/Loader";
 import { Toaster } from "sonner";
 import Layout from "./components/layout/Layout";
 import { appRoutes } from "./routes/appRoutes";
+import FinanceTracker from '@/pages/Dashboard/FinanceTracker';
 
 function AppRoutes() {
   // Helper to wrap lazy elements in Suspense

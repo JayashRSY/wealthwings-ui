@@ -8,7 +8,7 @@ export const recommendCard = async (transactionDetails: {
   cards: string[];
 }) => {
   const response = await axiosInstance.post(
-    "/card/recommend",
+    "/cards/recommend",
     transactionDetails
   );
   return response.data;
@@ -20,7 +20,7 @@ export const recommendCard = async (transactionDetails: {
  * @returns Extracted statement data from the backend.
  */
 export const uploadStatement = async (formData: FormData) => {
-  const response = await axiosInstance.post("/card/upload-statement", formData, {
+  const response = await axiosInstance.post("/cards/upload-statement", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
@@ -30,6 +30,6 @@ export const uploadStatement = async (formData: FormData) => {
 };
 
 export const getCardStatements = async () => {
-  const response = await axiosInstance.get("/card/statements");
+  const response = await axiosInstance.get("/cards/statements");
   return response.data;
 };
