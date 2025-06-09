@@ -10,6 +10,8 @@ import { Mail, Lock, ArrowRight, CheckCircle } from "lucide-react";
 import { RootState } from "@/store";
 import { register } from "@/api/authApi";
 import { useAppSelector } from "@/hooks/useRedux";
+import { Separator } from "@/components/ui/separator";
+import GoogleLoginButton from "@/components/GoogleLoginButton";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -119,7 +121,18 @@ const Register = () => {
             )}
           </Button>
         </form>
-
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <Separator className="w-full" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
+        </div>
+        {/* Social login can be added here if needed */}
+        <GoogleLoginButton />
         <div className="text-center">
           <p className="text-sm text-muted-foreground">
             Already have an account?{" "}

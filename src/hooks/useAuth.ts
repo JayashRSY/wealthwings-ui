@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { IUser } from "../interfaces/IApiTypes";
 import axiosInstance from "@/lib/api/axiosInstance";
 import { useAppSelector } from "./useRedux";
-import { login as loginApi, logout as logoutApi } from "../api/authApi";
+import { google as googleLoginApi, login as loginApi, logout as logoutApi } from "../api/authApi";
 
 import { useAppDispatch } from "./useRedux";
 export const useAuth = () => {
@@ -35,6 +35,22 @@ export const useAuth = () => {
         const res = await loginApi(credentials.email, credentials.password);
 
         const { accessToken, user } = res;
+        dispatch(setAccessToken(accessToken));
+        dispatch(setUser(user));
+        setAuthError(null);
+      } catch (error: any) {
+        setAuthError(error?.response?.data?.message || "Login failed");
+      }
+    },
+    [dispatch]
+  );
+  const googleLogin = useCallback(
+    async (idToken: string ) => {
+      try {
+        const res = await googleLoginApi(idToken);
+
+        const { accessToken, user } = res;
+        debugger
         dispatch(setAccessToken(accessToken));
         dispatch(setUser(user));
         setAuthError(null);
@@ -85,6 +101,7 @@ export const useAuth = () => {
     accessToken,
     isAuthenticated,
     login,
+    googleLogin,
     logout,
     hasRole,
     loading,

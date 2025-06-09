@@ -14,14 +14,13 @@ export interface IRefreshToken {
     success: boolean
     message: string
     accessToken: string;
-    data: IUser
 }
 
 export interface IGoogleResponse {
     success: boolean
     message: string
     accessToken: string;
-    data: IUser
+    user: IUser
 }
 
 export interface ILogoutResponse {
