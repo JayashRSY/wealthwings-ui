@@ -50,7 +50,7 @@ export const useAuth = () => {
         const res = await googleLoginApi(idToken);
 
         const { accessToken, user } = res;
-        debugger
+        
         dispatch(setAccessToken(accessToken));
         dispatch(setUser(user));
         setAuthError(null);

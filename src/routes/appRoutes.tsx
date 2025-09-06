@@ -3,6 +3,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "../pages/Dashboard/DashboardLayout";
 import CalculatorsLayout from "../pages/Dashboard/Calculators/CalculatorsLayout";
 import CardsLayout from "../pages/Dashboard/Cards/CardsLayout";
+import MutualFundsLayout from "../pages/Dashboard/MutualFunds/MutualFundsLayout";
 
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -29,6 +30,10 @@ const Cards = lazy(() => import("../pages/Dashboard/Cards"));
 const CardRecommender = lazy(() => import("../pages/Dashboard/Cards/Recommender/index"));
 const StatementUpload = lazy(() => import("../pages/Dashboard/Cards/StatementUpload/index"));
 const StatementHistory = lazy(() => import("../pages/Dashboard/Cards/StatementHistory/index"));
+const MutualFunds = lazy(() => import("../pages/Dashboard/MutualFunds"));
+const FundRecommender = lazy(() => import("../pages/Dashboard/MutualFunds/Recommender/index"));
+const FundComparisons = lazy(() => import("../pages/Dashboard/MutualFunds/Comparisons/index"));
+const AllFunds = lazy(() => import("../pages/Dashboard/MutualFunds/AllFunds/index"));
 const Analytics = lazy(() => import("../pages/Analytics"));
 const Services = lazy(() => import("../pages/Services"));
 
@@ -82,6 +87,17 @@ export const appRoutes = [
           { path: "recommender", element: CardRecommender },
           { path: "statement-upload", element: StatementUpload },
           { path: "statement-history", element: StatementHistory },
+          { path: "*", element: NotFound },
+        ],
+      },
+      {
+        path: "mutual-funds",
+        element: MutualFundsLayout,
+        children: [
+          { index: true, element: MutualFunds },
+          { path: "recommender", element: FundRecommender },
+          { path: "comparisons", element: FundComparisons },
+          { path: "all-funds", element: AllFunds },
           { path: "*", element: NotFound },
         ],
       },

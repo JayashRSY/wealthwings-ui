@@ -29,7 +29,12 @@ import { Input } from "@/components/ui/Input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { CreditCard, ArrowRight } from "lucide-react";
-import { CATEGORIES, CREDIT_CARDS, PLATFORMS } from "@/lib/constants/constants";
+import {
+  CATEGORIES,
+  CREDIT_CARDS,
+  PLATFORMS,
+  CreditCard as ICreditCard,
+} from "@/lib/constants/constants";
 import { recommendCard } from "@/api/cardApi";
 
 // Form schema
@@ -41,9 +46,15 @@ const formSchema = z.object({
   cards: z.array(z.string()).default([]),
 });
 
+interface RecommendationResult {
+  bestCard: ICreditCard;
+  reason: string;
+  savingsAmount: number;
+}
+
 export default function CardRecommender() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [recommendationResult, setRecommendationResult] = useState<any>(null);
+  const [recommendationResult, setRecommendationResult] =
+    useState<RecommendationResult | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -62,7 +73,15 @@ export default function CardRecommender() {
     try {
       // TODO: Replace with your real API endpoint
       const res = await recommendCard(values);
-      setRecommendationResult(res.data);
+      setRecommendationResult({
+        bestCard: CREDIT_CARDS?.filter(
+          (card) => card.id === res.data.card
+        )[0],
+        reason: res?.data.reason,
+        savingsAmount: res?.data.savings,
+      });
+      console.log(recommendationResult);
+      
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -265,60 +284,73 @@ export default function CardRecommender() {
                                       card.id
                                     );
                                     return (
-                                      <FormItem 
-                                        key={card.id} 
-                                        className={`flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 hover:bg-muted/50 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${ 
-                                          isSelected 
-                                            ? "bg-blue-50 border-blue-200 dark:bg-blue-950/30 dark:border-blue-800" 
-                                            : "" 
-                                        }`} 
-                                        onClick={() => { 
-                                          const currentValue = field.value || []; 
-                                          const newValue = isSelected 
-                                            ? currentValue.filter((id: string) => id !== card.id) 
-                                            : [...currentValue, card.id]; 
-                                          field.onChange(newValue); 
-                                        }} 
+                                      <FormItem
+                                        key={card.id}
+                                        className={`flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 hover:bg-muted/50 transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
+                                          isSelected
+                                            ? "bg-blue-50 border-blue-200 dark:bg-blue-950/30 dark:border-blue-800"
+                                            : ""
+                                        }`}
+                                        onClick={() => {
+                                          const currentValue =
+                                            field.value || [];
+                                          const newValue = isSelected
+                                            ? currentValue.filter(
+                                                (id: string) => id !== card.id
+                                              )
+                                            : [...currentValue, card.id];
+                                          field.onChange(newValue);
+                                        }}
                                         onKeyDown={(e) => {
                                           // Toggle on Enter or Space key
-                                          if (e.key === 'Enter' || e.key === ' ') {
+                                          if (
+                                            e.key === "Enter" ||
+                                            e.key === " "
+                                          ) {
                                             e.preventDefault();
-                                            const currentValue = field.value || [];
+                                            const currentValue =
+                                              field.value || [];
                                             const newValue = isSelected
-                                              ? currentValue.filter((id: string) => id !== card.id)
+                                              ? currentValue.filter(
+                                                  (id: string) => id !== card.id
+                                                )
                                               : [...currentValue, card.id];
                                             field.onChange(newValue);
                                           }
                                         }}
                                         role="button"
                                         tabIndex={0}
-                                      > 
-                                        <FormControl> 
-                                          <Checkbox 
-                                            checked={isSelected} 
-                                            className={ 
-                                              isSelected 
-                                                ? "text-blue-500 border-blue-500" 
-                                                : "" 
-                                            } 
-                                            onCheckedChange={(checked) => { 
-                                              const currentValue = field.value || []; 
-                                              const newValue = checked 
-                                                ? [...currentValue, card.id] 
-                                                : currentValue.filter((id: string) => id !== card.id); 
-                                              field.onChange(newValue); 
-                                            }} 
-                                            onClick={(e) => e.stopPropagation()} 
-                                          /> 
-                                        </FormControl> 
-                                        <div className="space-y-1 leading-none flex-1"> 
-                                          <FormLabel className="text-sm font-medium leading-none cursor-pointer"> 
-                                            {card.name} 
-                                          </FormLabel> 
-                                          <FormDescription className="text-xs text-muted-foreground"> 
-                                            {card.bank} 
-                                          </FormDescription> 
-                                        </div> 
+                                      >
+                                        <FormControl>
+                                          <Checkbox
+                                            checked={isSelected}
+                                            className={
+                                              isSelected
+                                                ? "text-blue-500 border-blue-500"
+                                                : ""
+                                            }
+                                            onCheckedChange={(checked) => {
+                                              const currentValue =
+                                                field.value || [];
+                                              const newValue = checked
+                                                ? [...currentValue, card.id]
+                                                : currentValue.filter(
+                                                    (id: string) =>
+                                                      id !== card.id
+                                                  );
+                                              field.onChange(newValue);
+                                            }}
+                                            onClick={(e) => e.stopPropagation()}
+                                          />
+                                        </FormControl>
+                                        <div className="space-y-1 leading-none flex-1">
+                                          <FormLabel className="text-sm font-medium leading-none cursor-pointer">
+                                            {card.name}
+                                          </FormLabel>
+                                          <FormDescription className="text-xs text-muted-foreground">
+                                            {card.bank}
+                                          </FormDescription>
+                                        </div>
                                       </FormItem>
                                     );
                                   }}
@@ -363,10 +395,10 @@ export default function CardRecommender() {
                   <div className="space-y-4">
                     <div>
                       <h3 className="font-semibold text-lg text-green-700">
-                        {recommendationResult.bestCard.name}
+                        {recommendationResult?.bestCard?.name}
                       </h3>
                       <p className="text-sm text-muted-foreground">
-                        {recommendationResult.bestCard.bank}
+                        {recommendationResult?.bestCard?.bank}
                       </p>
                     </div>
                     <div className="space-y-2 bg-muted/50 p-4 rounded-lg">
@@ -375,23 +407,36 @@ export default function CardRecommender() {
                           Potential Cashback
                         </span>
                         <span className="font-semibold text-green-600">
-                          ₹{recommendationResult.savingsAmount.toFixed(2)}
+                          {recommendationResult?.savingsAmount}
                         </span>
                       </div>
                       <div className="flex justify-between items-center">
                         <span className="text-sm font-medium">Card Type</span>
                         <span className="font-medium">
-                          {recommendationResult.bestCard.type}
+                          {recommendationResult?.bestCard?.type}
                         </span>
                       </div>
                     </div>
-                    {recommendationResult.bestCard.benefits && (
+                    
+                    {/* Display recommendation reason */}
+                    {recommendationResult?.reason && (
+                      <div className="p-3 bg-muted/30 dark:bg-muted/20 rounded-md border border-blue-100 dark:border-blue-900">
+                        <h4 className="font-medium mb-1 text-sm text-blue-700 dark:text-blue-400">
+                          Why We Recommend This Card
+                        </h4>
+                        <p className="text-sm text-foreground/80 dark:text-foreground/70">
+                          {recommendationResult.reason}
+                        </p>
+                      </div>
+                    )}
+                    
+                    {recommendationResult?.bestCard?.benefits && (
                       <div>
                         <h4 className="font-medium mb-2 text-sm">
                           Key Benefits
                         </h4>
                         <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                          {recommendationResult.bestCard.benefits.map(
+                          {recommendationResult?.bestCard?.benefits?.map(
                             (benefit: string, index: number) => (
                               <li key={index} className="text-sm">
                                 {benefit}
@@ -406,60 +451,6 @@ export default function CardRecommender() {
               </Card>
             )}
           </div>
-        </div>
-        <div className="flex flex-col gap-8">
-          {recommendationResult && (
-            <Card className="shadow-lg border-t-4 border-t-green-500">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <CreditCard className="h-5 w-5 text-green-500" />
-                  Best Card for You
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold text-lg text-green-700">
-                      {recommendationResult.bestCard.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {recommendationResult.bestCard.bank}
-                    </p>
-                  </div>
-                  <div className="space-y-2 bg-muted/50 p-4 rounded-lg">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">
-                        Potential Cashback
-                      </span>
-                      <span className="font-semibold text-green-600">
-                        ₹{recommendationResult.savingsAmount.toFixed(2)}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">Card Type</span>
-                      <span className="font-medium">
-                        {recommendationResult.bestCard.type}
-                      </span>
-                    </div>
-                  </div>
-                  {recommendationResult.bestCard.benefits && (
-                    <div>
-                      <h4 className="font-medium mb-2 text-sm">Key Benefits</h4>
-                      <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                        {recommendationResult.bestCard.benefits.map(
-                          (benefit: string, index: number) => (
-                            <li key={index} className="text-sm">
-                              {benefit}
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-          )}
         </div>
       </div>
     </div>

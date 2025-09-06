@@ -17,6 +17,7 @@ import {
   FileText,
   Calendar,
   Wallet,
+  TrendingUp,
 } from "lucide-react";
 import { useAppSelector } from "@/hooks/useRedux";
 
@@ -68,6 +69,18 @@ const Sidebar: React.FC = () => {
         { label: "Recommender", href: "recommender" },
         { label: "Upload Statement", href: "statement-upload" },
         { label: "Statement History", href: "statement-history" },
+      ],
+    },
+    {
+      label: "Mutual Funds",
+      href: "/mutual-funds",
+      icon: <TrendingUp className="w-5 h-5" />,
+      color: "text-emerald-500",
+      subItems: [
+        { label: "Dashboard", href: "" },
+        { label: "All Funds", href: "all-funds" },
+        { label: "Fund Recommender", href: "recommender" },
+        { label: "Compare Funds", href: "comparisons" },
       ],
     },
     // {
