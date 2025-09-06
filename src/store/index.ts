@@ -7,6 +7,7 @@ import authReducer from '../features/auth/authSlice';
 import layoutReducer from '../features/layout/layoutSlice';
 import counterReducer from '../features/counter/counterSlice';
 import themeReducer from '../features/theme/themeSlice';
+import blogReducer from '../features/blog/blogSlice';
 
 // Define the persist configuration
 const persistConfig = {
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   layout: layoutReducer,
   counter: counterReducer,
   theme: themeReducer,
+  blog: blogReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

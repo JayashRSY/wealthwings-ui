@@ -106,6 +106,10 @@ const Sidebar: React.FC = () => {
       href: "/blogs",
       icon: <BookOpen className="w-5 h-5" />,
       color: "text-pink-500",
+      subItems: [
+        { label: "All Blogs", href: "" },
+        { label: "Create New", href: "new" },
+      ],
     },
   ], []);
   const bottomNavItems: NavItem[] = useMemo(() => [

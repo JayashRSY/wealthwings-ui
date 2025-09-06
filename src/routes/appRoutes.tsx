@@ -4,6 +4,7 @@ import DashboardLayout from "../pages/Dashboard/DashboardLayout";
 import CalculatorsLayout from "../pages/Dashboard/Calculators/CalculatorsLayout";
 import CardsLayout from "../pages/Dashboard/Cards/CardsLayout";
 import MutualFundsLayout from "../pages/Dashboard/MutualFunds/MutualFundsLayout";
+import BlogsLayout from "../pages/Dashboard/Blogs/BlogsLayout";
 
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -34,6 +35,9 @@ const MutualFunds = lazy(() => import("../pages/Dashboard/MutualFunds"));
 const FundRecommender = lazy(() => import("../pages/Dashboard/MutualFunds/Recommender/index"));
 const FundComparisons = lazy(() => import("../pages/Dashboard/MutualFunds/Comparisons/index"));
 const AllFunds = lazy(() => import("../pages/Dashboard/MutualFunds/AllFunds/index"));
+const Blogs = lazy(() => import("../pages/Dashboard/Blogs"));
+const BlogDetail = lazy(() => import("../pages/Dashboard/Blogs/BlogDetail"));
+const BlogEditor = lazy(() => import("../pages/Dashboard/Blogs/BlogEditor"));
 const Analytics = lazy(() => import("../pages/Analytics"));
 const Services = lazy(() => import("../pages/Services"));
 
@@ -101,10 +105,21 @@ export const appRoutes = [
           { path: "*", element: NotFound },
         ],
       },
+      {
+        path: "blogs",
+        element: BlogsLayout,
+        children: [
+          { index: true, element: Blogs },
+          { path: "new", element: BlogEditor },
+          { path: "edit/:id", element: BlogEditor },
+          { path: ":slug", element: BlogDetail },
+          { path: "*", element: NotFound },
+        ],
+      },
       { path: "analytics", element: Analytics },
       { path: "services", element: Services },
       { path: "*", element: NotFound },
     ],
   },
   { path: "*", element: NotFound },
-]; 
+];
