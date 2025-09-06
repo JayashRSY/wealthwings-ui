@@ -25,18 +25,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Target, TrendingUp, Star, AlertCircle, CheckCircle } from "lucide-react";
+import { Target, Star, CheckCircle } from "lucide-react";
 import { 
   INVESTMENT_GOALS, 
   INVESTMENT_HORIZONS, 
   RISK_LEVELS, 
   FUND_CATEGORIES,
-  EQUITY_SUB_CATEGORIES,
-  DEBT_SUB_CATEGORIES,
-  HYBRID_SUB_CATEGORIES,
   INVESTMENT_AMOUNTS,
   MutualFund 
 } from "@/lib/constants/mutualFundsConstants";
@@ -336,7 +332,7 @@ export default function FundRecommender() {
                   Recommended Funds
                 </h2>
                 {recommendationResult.recommendedFunds.map((fund: MutualFund, index: number) => (
-                  <Card key={fund.id} className="hover:shadow-lg transition-all duration-300">
+                  <Card key={index} className="hover:shadow-lg transition-all duration-300">
                     <CardContent className="p-6">
                       <div className="flex flex-col lg:flex-row gap-6">
                         {/* Fund Info */}

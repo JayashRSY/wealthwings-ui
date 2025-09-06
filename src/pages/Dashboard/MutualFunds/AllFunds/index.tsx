@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -20,12 +19,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { 
   Search, 
   Filter, 
-  Star, 
-  TrendingUp, 
-  TrendingDown,
-  ArrowUpDown,
   Eye,
-  Download,
   Loader2,
   SortAsc,
   SortDesc,
@@ -33,7 +27,6 @@ import {
 } from "lucide-react";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 import { getAllFunds } from "@/api/mutualFundsApi";
-import { MutualFund } from "@/lib/constants/mutualFundsConstants";
 
 interface MutualFundData {
   id: string;
@@ -229,12 +222,12 @@ export default function AllFunds() {
     return `₹${aum} Cr`;
   };
 
-  const formatMinInvestment = (amount: number) => {
-    if (amount >= 1000) {
-      return `₹${(amount / 1000).toFixed(0)}K`;
-    }
-    return `₹${amount}`;
-  };
+  // const formatMinInvestment = (amount: number) => {
+  //   if (amount >= 1000) {
+  //     return `₹${(amount / 1000).toFixed(0)}K`;
+  //   }
+  //   return `₹${amount}`;
+  // };
 
   if (loading) {
     return (

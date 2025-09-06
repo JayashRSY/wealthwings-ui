@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -6,17 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { BarChart3, TrendingUp, Star, AlertCircle, CheckCircle, X } from "lucide-react";
+import { BarChart3, TrendingUp, Star, CheckCircle, X } from "lucide-react";
 import { MUTUAL_FUNDS, MutualFund, RISK_LEVELS } from "@/lib/constants/mutualFundsConstants";
 import { compareFunds } from "@/api/mutualFundsApi";
 
@@ -64,15 +57,15 @@ export default function FundComparisons() {
     ));
   };
 
-  const getBestValue = (data: any[], key: string) => {
-    if (data.length === 0) return null;
+  // const getBestValue = (data: any[], key: string) => {
+  //   if (data.length === 0) return null;
     
-    const values = data.map(item => item.value);
-    if (typeof values[0] === 'number') {
-      return Math.max(...values);
-    }
-    return null;
-  };
+  //   const values = data.map(item => item.value);
+  //   if (typeof values[0] === 'number') {
+  //     return Math.max(...values);
+  //   }
+  //   return null;
+  // };
 
   return (
     <div className="container mx-auto py-8 max-w-7xl">

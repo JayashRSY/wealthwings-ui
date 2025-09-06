@@ -1,5 +1,4 @@
 import axiosInstance from "@/lib/api/axiosInstance";
-import { MutualFund } from "@/lib/constants/mutualFundsConstants";
 
 export const recommendFunds = async (preferences: {
   investmentGoal: string;
