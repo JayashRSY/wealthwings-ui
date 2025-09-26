@@ -23,6 +23,11 @@ const DynamicMobileHeader: React.FC<DynamicMobileHeaderProps> = ({ onMenuClick }
   const navigate = useNavigate();
   const { user, logout } = useAuth();
 
+  // Don't render header if user is not logged in
+  if (!user) {
+    return null;
+  }
+
   // Define home pages where main header should appear
   const homePages = ["/", "/dashboard", "/home"];
   const isHomePage = homePages.includes(location.pathname);

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/useAuth";
 import { 
   LayoutDashboard, 
   CreditCard, 
@@ -15,6 +16,12 @@ interface MobileBottomNavProps {
 
 const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ onMoreClick }) => {
   const { pathname } = useLocation();
+  const { user } = useAuth();
+
+  // Don't render bottom nav if user is not logged in
+  if (!user) {
+    return null;
+  }
 
   const navItems = [
     {
