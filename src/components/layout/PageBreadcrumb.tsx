@@ -40,7 +40,7 @@ export function PageBreadcrumb() {
   });
 
   return (
-    <Breadcrumb className="m-6">
+    <Breadcrumb className="m-6 hidden md:block">
       <BreadcrumbList>
         {breadcrumbItems.map((item: { href: string; label: string; isLast: boolean }) => (
           <React.Fragment key={item.href}>

@@ -326,7 +326,8 @@ const Sidebar: React.FC = () => {
       className={cn(
         "flex flex-col h-screen bg-background/80 backdrop-blur-lg border-r border-border shadow-xl transition-all duration-300",
         "rounded-xl m-4",
-        isCollapsed ? "w-20" : "w-72"
+        isCollapsed ? "w-20" : "w-72",
+        "hidden md:flex"
       )}
       style={{ minWidth: isCollapsed ? "5rem" : "16rem" }}
     >
@@ -354,7 +355,7 @@ const Sidebar: React.FC = () => {
       </div>
 
       {/* Main Navigation */}
-      <div className="flex-1 py-6 overflow-y-auto">
+      <div className="flex-1 py-6 overflow-y-auto scrollbar-hide">
         <ul className="space-y-2 px-3">
           {navItems.map(renderNavItem)}
         </ul>

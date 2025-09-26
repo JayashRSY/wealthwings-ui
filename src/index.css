@@ -189,3 +189,237 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Hide scrollbars while maintaining scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Mobile App-like Styles */
+@media (max-width: 768px) {
+  /* Global mobile styles */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Hide all scrollbars on mobile */
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Prevent body scrolling */
+  body {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Mobile container styles */
+  .mobile-container {
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
+  }
+  
+  /* iOS Safari specific fixes */
+  .ios-fix {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  /* Mobile typography improvements */
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Mobile button improvements */
+  button, 
+  [role="button"] {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  
+  /* Mobile input improvements */
+  input, 
+  textarea, 
+  select {
+    font-size: 16px; /* Prevent zoom on focus */
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  /* Mobile card improvements */
+  .mobile-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+  }
+  
+  /* Mobile header improvements */
+  .mobile-header {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Mobile navigation improvements */
+  .mobile-nav-item {
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+  
+  .mobile-nav-item:active {
+    transform: scale(0.95);
+  }
+  
+  /* Mobile list improvements */
+  .mobile-list-item {
+    padding: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .mobile-list-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* Mobile form improvements */
+  .mobile-form-group {
+    margin-bottom: 20px;
+  }
+  
+  .mobile-form-label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .mobile-form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    font-size: 16px;
+  }
+  
+  /* Mobile button styles */
+  .mobile-button {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .mobile-button:active {
+    transform: scale(0.95);
+  }
+  
+  /* Mobile spacing improvements */
+  .mobile-section {
+    padding: 16px;
+  }
+  
+  .mobile-container-padding {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  /* Mobile text improvements */
+  .mobile-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  
+  .mobile-subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  
+  .mobile-body {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .mobile-caption {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+  
+  /* Mobile status bar fix */
+  .mobile-safe-area {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Custom scrollbar styles for better UX */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.7);
+}
+
+/* Mobile-specific scrollbar fixes */
+@media (max-width: 767px) {
+  /* Hide all scrollbars on mobile */
+  * {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  *::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Prevent body scrolling on mobile */
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  /* Ensure mobile containers don't create scrollbars */
+  .mobile-container {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Fix for iOS Safari */
+  .ios-fix {
+    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
+  }
+}
