@@ -42,7 +42,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         {/* Mobile Header - Hidden on desktop, only show when user is logged in */}
         {user && <DynamicMobileHeader onMenuClick={handleMobileMenuToggle} />}
         
-        <main className={user ? "flex-1 overflow-x-hidden overflow-y-auto scrollbar-hide mb-16 md:mb-0 pt-16 md:pt-0" : "flex-1 overflow-x-hidden overflow-y-auto scrollbar-hide md:pt-0"}>
+        <main className={user ? "flex-1 overflow-x-hidden overflow-y-auto scrollbar-hide mb-20 md:mb-0 pt-16 md:pt-0 ios-safe-bottom" : "flex-1 overflow-x-hidden overflow-y-auto scrollbar-hide md:pt-0"}>
           {children}
         </main>
         

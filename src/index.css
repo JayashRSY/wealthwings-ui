@@ -200,6 +200,42 @@
   display: none; /* Chrome, Safari and Opera */
 }
 
+/* Mobile Bottom Navigation Enhancements */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Smooth transitions for mobile navigation */
+.mobile-nav-item {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav-item:active {
+  transform: scale(0.95);
+}
+
+/* Haptic feedback simulation */
+@media (hover: none) and (pointer: coarse) {
+  .mobile-nav-item:active {
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+}
+
+/* Prevent content from being hidden behind bottom nav */
+body {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* iOS-specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  .ios-safe-bottom {
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+
 /* Mobile App-like Styles */
 @media (max-width: 768px) {
   /* Global mobile styles */
