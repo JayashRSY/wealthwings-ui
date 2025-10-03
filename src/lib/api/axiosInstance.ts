@@ -11,7 +11,7 @@ import { jwtDecode } from "jwt-decode";
 // Create axios instance
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
-  timeout: 10000,
+  timeout: 60000, // Increased timeout to 60 seconds for data-intensive operations
   headers: {
     "Content-Type": "application/json",
   },

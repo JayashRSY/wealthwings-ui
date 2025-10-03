@@ -44,7 +44,7 @@ const formSchema = z.object({
   investmentHorizon: z.string().min(1, "Please select an investment horizon"),
   riskTolerance: z.string().min(1, "Please select your risk tolerance"),
   investmentAmount: z.number().min(500, "Minimum investment amount is ₹500"),
-  category: z.string().optional(),
+  category: z.string().min(1, "Please select a fund category"),
 });
 
 export default function FundRecommender() {
@@ -267,7 +267,7 @@ export default function FundRecommender() {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel className="text-sm font-semibold">
-                            Fund Category (Optional)
+                            Fund Category
                           </FormLabel>
                           <Select
                             onValueChange={(value) => {
@@ -277,7 +277,7 @@ export default function FundRecommender() {
                           >
                             <FormControl>
                               <SelectTrigger className="focus-visible:ring-blue-500">
-                                <SelectValue placeholder="Select fund category (optional)" />
+                                <SelectValue placeholder="Select fund category" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -423,4 +423,4 @@ export default function FundRecommender() {
       </div>
     </div>
   );
-} 
+}
