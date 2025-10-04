@@ -23,6 +23,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import BankStatements from "@/components/BankStatements";
 
 const data = [
   { name: "Jan", value: 400 },
@@ -88,6 +89,7 @@ const Dashboard = () => {
         </p>
       </div>
 
+      <BankStatements />
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="hover:shadow-lg transition-all duration-300 border-border bg-card/80 dark:bg-card/60 backdrop-blur-sm">
