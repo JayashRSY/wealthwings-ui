@@ -3,37 +3,33 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
-import ExpenseList from '@/components/finance/ExpenseList';
-import { IExpense, IIncome } from '@/interfaces/IFinanceTypes';
-import IncomeList from '@/components/finance/IncomeList';
-import ExpenseDialog from '@/components/finance/ExpenseDialog';
-import IncomeDialog from '@/components/finance/IncomeDialog';
+import { ITransaction, TransactionType } from '@/interfaces/IFinanceTypes';
+import TransactionList from '@/components/finance/TransactionList';
+import TransactionDialog from '@/components/finance/TransactionDialog';
 
 const FinanceTracker = () => {
-  const [activeTab, setActiveTab] = useState('expenses');
-  const [isExpenseDialogOpen, setIsExpenseDialogOpen] = useState(false);
-  const [isIncomeDialogOpen, setIsIncomeDialogOpen] = useState(false);
-  const [selectedExpense, setSelectedExpense] = useState<IExpense | null>(null);
-  const [selectedIncome, setSelectedIncome] = useState<IIncome | null>(null);
+  const [activeTab, setActiveTab] = useState<TransactionType>('expense');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState<ITransaction | null>(null);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
-  const handleAddExpense = () => {
-    setSelectedExpense(null);
-    setIsExpenseDialogOpen(true);
+  const handleAdd = () => {
+    setSelectedTransaction(null);
+    setIsDialogOpen(true);
   };
 
-  const handleEditExpense = (expense: IExpense) => {
-    setSelectedExpense(expense);
-    setIsExpenseDialogOpen(true);
+  const handleEdit = (transaction: ITransaction) => {
+    setSelectedTransaction(transaction);
+    setIsDialogOpen(true);
   };
 
-  const handleAddIncome = () => {
-    setSelectedIncome(null);
-    setIsIncomeDialogOpen(true);
-  };
-
-  const handleEditIncome = (income: IIncome) => {
-    setSelectedIncome(income);
-    setIsIncomeDialogOpen(true);
+  const handleDialogClose = (open: boolean) => {
+    setIsDialogOpen(open);
+    if (!open) {
+      setSelectedTransaction(null);
+      // Trigger refresh of the list
+      setRefreshTrigger(prev => prev + 1);
+    }
   };
 
   return (
@@ -41,11 +37,11 @@ const FinanceTracker = () => {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Finance Tracker</h1>
         <Button
-          onClick={activeTab === 'expenses' ? handleAddExpense : handleAddIncome}
+          onClick={handleAdd}
           className="flex items-center gap-2"
         >
           <Plus className="h-4 w-4" />
-          Add {activeTab === 'expenses' ? 'Expense' : 'Income'}
+          Add {activeTab === 'expense' ? 'Expense' : 'Income'}
         </Button>
       </div>
 
@@ -54,34 +50,44 @@ const FinanceTracker = () => {
           <CardTitle>Track Your Finances</CardTitle>
         </CardHeader>
         <CardContent>
-          <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="expenses">Expenses</TabsTrigger>
+          <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as TransactionType)}>
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="expense">Expenses</TabsTrigger>
               <TabsTrigger value="income">Income</TabsTrigger>
+              <TabsTrigger value="all">All Transactions</TabsTrigger>
             </TabsList>
-            <TabsContent value="expenses">
-              <ExpenseList onEdit={handleEditExpense} />
+            <TabsContent value="expense">
+              <TransactionList
+                onEdit={handleEdit}
+                type="expense"
+                refreshTrigger={refreshTrigger}
+              />
             </TabsContent>
             <TabsContent value="income">
-              <IncomeList onEdit={handleEditIncome} />
+              <TransactionList
+                onEdit={handleEdit}
+                type="income"
+                refreshTrigger={refreshTrigger}
+              />
+            </TabsContent>
+            <TabsContent value="all">
+              <TransactionList
+                onEdit={handleEdit}
+                refreshTrigger={refreshTrigger}
+              />
             </TabsContent>
           </Tabs>
         </CardContent>
       </Card>
 
-      <ExpenseDialog
-        open={isExpenseDialogOpen}
-        onOpenChange={setIsExpenseDialogOpen}
-        expense={selectedExpense}
-      />
-
-      <IncomeDialog
-        open={isIncomeDialogOpen}
-        onOpenChange={setIsIncomeDialogOpen}
-        income={selectedIncome}
+      <TransactionDialog
+        open={isDialogOpen}
+        onOpenChange={handleDialogClose}
+        transaction={selectedTransaction}
+        type={activeTab === 'all' ? 'expense' : activeTab}
       />
     </div>
   );
-} 
+}
 
 export default FinanceTracker;

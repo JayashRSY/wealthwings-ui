@@ -92,3 +92,31 @@ export interface IIncomesResponse {
   pagination: IPagination;
   }
 }
+
+// Unified Transaction Types
+export type TransactionType = 'income' | 'expense';
+
+export interface ITransaction {
+  _id?: string;
+  type: TransactionType;
+  amount: number;
+  category: string;
+  description: string;
+  date: Date;
+  source?: string; // For income
+  paymentMethod?: string; // For expense
+  tags: string[];
+  isRecurring: boolean;
+  recurringFrequency?: RecurringFrequency;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface ITransactionsResponse {
+  success: boolean;
+  message: string;
+  data: {
+    transactions: ITransaction[];
+    pagination: IPagination;
+  };
+}
